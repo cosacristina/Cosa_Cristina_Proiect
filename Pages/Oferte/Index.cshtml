@@ -1,0 +1,42 @@
+﻿@page
+@model Cosa_Cristina_Proiect.Pages.Oferte.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Detalii oferte</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Oferta[0].NumeOferta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Oferta[0].EuroCredit)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Oferta) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeOferta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EuroCredit)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

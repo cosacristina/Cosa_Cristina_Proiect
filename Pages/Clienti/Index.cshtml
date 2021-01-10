@@ -1,0 +1,63 @@
+﻿@page "{searchString?}"
+@model Cosa_Cristina_Proiect.Pages.Clienti.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Detalii clienti</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form>
+    <p>
+        <select asp-for="NumeClientt" asp-items="Model.Orase">
+            <option value="">Orase</option>
+        </select>
+        Nume client: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filtrare" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].NumeClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].Oras)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].NumarTelefon)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Client) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeClient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Oras)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumarTelefon)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,70 @@
+﻿@page
+@model Cosa_Cristina_Proiect.Pages.Reincarcari.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Reincarcare</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Reincarcare.ID" />
+            <div class="form-group">
+                <label asp-for="Reincarcare.Numar" class="control-label"></label>
+                <input asp-for="Reincarcare.Numar" class="form-control" />
+                <span asp-validation-for="Reincarcare.Numar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reincarcare.Data" class="control-label"></label>
+                <input asp-for="Reincarcare.Data" class="form-control" />
+                <span asp-validation-for="Reincarcare.Data" class="text-danger"></span>
+            </div>
+            <label asp-for="Reincarcare.ClientID" class="control-label">Nume Client</label>
+            <select asp-for="Reincarcare.ClientID" class="form-control" asp-items="ViewBag.ClientID">
+            </select>
+            <span asp-validation-for="Reincarcare.ClientID" class="text-danger"></span>
+            <div class="form-group">
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                foreach (var cat in Model.ListaOfertaAsignata)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="radio"
+                                               name="oferteSelectate"
+                                               value="@cat.OfertaID"
+                                               @(Html.Raw(cat.Asignata ? "checked=\"checked\"" : "")) />
+                                        @cat.OfertaID @: @cat.Nume
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
